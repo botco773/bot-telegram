@@ -1,17 +1,13 @@
-module.exports = {
+const model = await import("../model/user.js");
+const crud = model.default;
+export default {
   name: "start",
   description: "Greeting text",
-  execute(ctx, bot) {
-    let help = ctx.help
-      .map((data) => {
-        let nameFile = data.split(".");
-        let nameCommands = `/${nameFile[0]}\n`;
-        return nameCommands;
-      })
-      .join("");
+  async execute(ctx, bot) {
+    await crud.insert(ctx.chat);
     return bot.telegram.sendMessage(
       ctx.chat.id,
-      "hello there! Welcome to my new telegram bot. \n" + help,
+      `hello there! Welcome to my new telegram bot. \nuse /help for list all command`,
       {}
     );
   },

@@ -1,5 +1,6 @@
-const ApiService = require(`../service/api.service`);
-module.exports = {
+import * as service from "../service/api.service.js";
+const ApiService = service.default;
+export default {
   name: "sholat",
   description: "Get schedule shalat",
   execute: async (ctx, bot) => {
@@ -14,8 +15,8 @@ module.exports = {
 
         bot.telegram.sendLocation(
           ctx.chat.id,
-          data.data.koordinat.lat,
-          data.data.koordinat.lon
+          data.koordinat.lat,
+          data.koordinat.lon
         );
       })
       .catch((error) => {

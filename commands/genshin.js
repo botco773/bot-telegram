@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   name: "genshin",
   description: "get picture genshin impact",
   execute(ctx, bot) {
