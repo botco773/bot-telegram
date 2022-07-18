@@ -41,5 +41,5 @@ for (const file of commandFiles) {
     command.execute(ctx, bot);
   });
 }
-bot.on("text", (ctx) => ctx.reply("Hello World"));
+
 bot.launch();
