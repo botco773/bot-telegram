@@ -30,8 +30,13 @@ export default {
       bot.on("callback_query", async (ctx) => {
         const getId = JSON.parse(ctx.callbackQuery.data);
         const getMessageId = ctx.callbackQuery.message;
+        const dateNow = new Date()
+          .toISOString()
+          .replace("-", "/")
+          .split("T")[0]
+          .replace("-", "/");
 
-        let dataQuran = await sholatModel.get(`jadwal/${getId.id}/2022/01/14`);
+        let dataQuran = await sholatModel.get(`jadwal/${getId.id}/${dateNow}`);
 
         let koordinat = Object.entries(dataQuran.koordinat)
           .map(([key, val] = entry) => `${key} : ${val}\n`)
