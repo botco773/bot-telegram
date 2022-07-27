@@ -5,7 +5,8 @@ import fs from "fs";
 
 import userModel from "./model/userModel.js";
 import superWizard from "./scenes/scenesSholat.js";
-const stage = new Scenes.Stage([superWizard]);
+import { settingWizard, locationWizard } from "./scenes/scenesSetting.js";
+const stage = new Scenes.Stage([superWizard, settingWizard, locationWizard]);
 
 const bot = new Telegraf(process.env.TOKEN_TELEGRAM);
 
