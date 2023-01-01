@@ -1,7 +1,9 @@
+import http from "http";
 import { Scenes, session, Telegraf } from "telegraf";
 import dotenv from "dotenv";
 dotenv.config();
 import fs from "fs";
+import { readFile } from "./helper/fileSystem.js";
 
 import userModel from "./model/userModel.js";
 import superWizard from "./scenes/scenesSholat.js";
@@ -21,7 +23,7 @@ let formatHelp = [];
 let user;
 for (const file of commandFiles) {
   /**
-   * @link https://stackoverflow.com/a/55049040/9446622
+   * @link https://stackovereadFilelow.com/a/55049040/9446622
    */
   const importCommand = await import(`./commands/${file}`);
   const command = importCommand.default;
@@ -44,3 +46,24 @@ for (const file of commandFiles) {
 }
 
 bot.launch();
+
+const hostname = "127.0.0.1";
+const port = 3000;
+
+const requestListener = function (req, res) {
+  try {
+    let contents = readFile("view/index.html");
+    res.setHeader("Content-Type", "text/html");
+    res.writeHead(200);
+    res.end(contents);
+  } catch (error) {
+    res.setHeader("Content-Type", "text/plain");
+    res.end(error.message);
+  }
+};
+
+const server = http.createServer(requestListener);
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
