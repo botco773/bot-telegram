@@ -47,8 +47,8 @@ for (const file of commandFiles) {
 
 bot.launch();
 
-const hostname = "127.0.0.1";
-const port = 3000;
+const hostname = process.env.HOSTNAME;
+const port = process.env.PORT;
 
 const requestListener = function (req, res) {
   try {
